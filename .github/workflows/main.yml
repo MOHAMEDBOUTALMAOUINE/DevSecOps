@@ -11,12 +11,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # 1. SCAN DE SÉCURITÉ DU CODE (Bandit)
+      # 1. SCAN DE SÉCURITÉ DU CODE (Correction du format)
       - name: Security Scan Code (SAST)
         run: |
           pip install bandit
-          bandit -r . -f table
-
+          bandit -r . -f txt
       # 2. CONNEXION À AZURE
       - name: Azure Login
         uses: azure/login@v1
