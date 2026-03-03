@@ -31,7 +31,7 @@ Pour répondre aux enjeux de confiance numérique, le pipeline intègre :
 ## 🛠️ Installation & Test Local
 ```bash
 # Cloner le projet
-git clone <URL_DU_REPO>
+git clone https://github.com/MOHAMEDBOUTALMAOUINE/DevSecOps
 
 # Builder l'image localement
 docker build -t health-api:latest .
