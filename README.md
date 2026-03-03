@@ -28,7 +28,13 @@ Pour répondre aux enjeux de confiance numérique, le pipeline intègre :
 5.  **Push** vers **Azure Container Registry** (si tous les scans sont validés).
 6.  **Déploiement** automatique sur **Azure Web Apps**.
 
-## 🛠️ Installation & Test Local
+<div align="center">
+  <h3> Démonstration du Pipeline DevSecOps</h3>
+  <p><i>Aperçu du cycle CI/CD : Scan Bandit -> Build Docker -> Scan Trivy -> Déploiement Azure</i></p>
+  <video src="https://github.com/user-attachments/assets/9ff1a4d2-7be5-4e6d-9491-abf6414f1b78" width="100%" controls></video>
+</div> 
+
+##  Installation & Test Local
 ```bash
 # Cloner le projet
 git clone https://github.com/MOHAMEDBOUTALMAOUINE/DevSecOps
@@ -38,8 +44,4 @@ docker build -t health-api:latest .
 
 # Lancer le conteneur
 docker run -p 5000:5000 health-api:latest
-<div align="center">
-  <h3> Démonstration du Pipeline DevSecOps</h3>
-  <p><i>Aperçu du cycle CI/CD : Scan Bandit -> Build Docker -> Scan Trivy -> Déploiement Azure</i></p>
-  <video src="https://github.com/user-attachments/assets/9ff1a4d2-7be5-4e6d-9491-abf6414f1b78" width="100%" controls></video>
-</div>
+
