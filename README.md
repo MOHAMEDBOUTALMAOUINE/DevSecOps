@@ -3,7 +3,7 @@
 ##  Présentation
 Ce projet illustre la mise en place d'une chaîne **DevSecOps** complète pour une API de santé simulée. L'objectif est de garantir que chaque déploiement sur **Azure** respecte des standards de sécurité rigoureux, conformément aux exigences des infrastructures critiques et du secteur public.
 
-Ce projet a été réalisé pour démontrer mes compétences techniques sur **Docker**, le **CI/CD** et la **Sécurité Cloud** dans le cadre de ma recherche de PFE.
+Ce projet a été réalisé pour démontrer mes compétences techniques sur **Docker**, le **CI/CD** et la **Sécurité Cloud**.
 
 ##  Stack Technique
 * **Langage :** Python (Flask)
