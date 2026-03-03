@@ -1,0 +1,49 @@
+name: Nexpublica DevSecOps Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  security-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 1. SCAN DE SÉCURITÉ DU CODE (Bandit)
+      - name: Security Scan Code (SAST)
+        run: |
+          pip install bandit
+          bandit -r . -f table
+
+      # 2. CONNEXION À AZURE
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      # 3. BUILD ET SCAN DE L'IMAGE DOCKER (Trivy)
+      - name: Build Image
+        run: docker build -t nexregmoha.azurecr.io/health-api:${{ github.sha }} .
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'nexregmoha.azurecr.io/health-api:${{ github.sha }}'
+          format: 'table'
+          exit-code: '1' # Bloque le déploiement si failles critiques
+          severity: 'CRITICAL,HIGH'
+
+      # 4. PUSH VERS AZURE REGISTRY
+      - name: Push to ACR
+        run: |
+          az acr login --name nexregmoha
+          docker push nexregmoha.azurecr.io/health-api:${{ github.sha }}
+          docker tag nexregmoha.azurecr.io/health-api:${{ github.sha }} nexregmoha.azurecr.io/health-api:latest
+          docker push nexregmoha.azurecr.io/health-api:latest
+
+      # 5. DÉPLOIEMENT SUR LA WEB APP
+      - name: Deploy to Azure Web App
+        run: |
+          az webapp config container set --name nex-health-api --resource-group NexpublicaProjectRG --docker-custom-image-name nexregmoha.azurecr.io/health-api:latest
