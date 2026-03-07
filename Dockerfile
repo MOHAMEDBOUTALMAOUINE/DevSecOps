@@ -1,5 +1,5 @@
 # 1. Utilise une version stable (évite les 'rc' - Release Candidate)
-FROM python:3.12-alpine
+FROM python:3.14.0-alpine
 
 # 2. Alpine utilise 'adduser -D' (pas useradd)
 RUN adduser -D appuser
