@@ -1,5 +1,5 @@
 # 1. Utilise une version stable (évite les 'rc' - Release Candidate)
-FROM python:3.14.0-alpine
+FROM python:3.15-rc-slim-trixie
 
 # 2. Alpine utilise 'adduser -D' (pas useradd)
 RUN adduser -D appuser
