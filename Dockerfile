@@ -1,4 +1,4 @@
-FROM python:3.14.3-slim
+FROM python:3.15-rc-alpine3.22
 
 RUN useradd -m appuser
 USER appuser
